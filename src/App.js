@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const App = props => {
   const [state, setState] = useState(props)
   const { name, price } = state
-  // const [name, setName] = useState(props.name)
-  // const [price, setPrice] = useState(props.price)
+// 新規画面読み込み or 更新rennderringのあとで実行される(componentDidMount,componentDodUpdate)
+  useEffect(() => {
+    console.log('didmount or update')
+  })
+// mountされたときのみ、JSXのレンダリング後に実行される
+  useEffect(() => {
+    console.log('didmount')
+  },[])
+  // this callback is for nameonly.
+  useEffect(() => {
+    console.log('nameonly')
+  },[name])
   return (
     <>
       <p>現在の{name}は{price}です</p>
