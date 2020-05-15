@@ -13,13 +13,10 @@ phases:
     commands:
       #アーカイブ名を指定して（-f),新規に作成する（-c）
       - tar cf /tmp/node_modules.tar node_modules
-      # どこで実行するのか？
 artifacts:
   files:
-    # 再帰的にどんなファイルからもbuildフォルダを見つける
     - '**/*'
   base-directory: build
-  # キャッシュをS3に保存する場所（なくてもいい）
 cache:
   paths:
     - /tmp/node_modules.tar
