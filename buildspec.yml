@@ -19,7 +19,7 @@ artifacts:
     # 再帰的にどんなファイルからもbuildフォルダを見つける
     - '**/*'
   base-directory: build
-  キャッシュをS3に保存する場所（なくてもいい）
+  # キャッシュをS3に保存する場所（なくてもいい）
 cache:
   paths:
     - /tmp/node_modules.tar
