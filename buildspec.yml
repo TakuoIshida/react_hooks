@@ -1,0 +1,26 @@
+version: 0.2
+# 実行コマンドphases
+phases:
+  pre_build:
+    commands:
+      # -e ＄PATH: ファイルが存在するか？, if ; then; fi: linuxのif文
+      - if [ -e /tmp/node_modules.tar ]; then tar xf /tmp/node_modules.tar; fi
+      - npm install
+  build:
+    commands:
+      - npm run build
+  post_build:
+    commands:
+      #アーカイブ名を指定して（-f),新規に作成する（-c）
+      - tar cf /tmp/node_modules.tar node_modules
+      # どこで実行するのか？
+artifacts:
+  files:
+    # 再帰的にどんなファイルからもbuildフォルダを見つける
+    - '**/*'
+  base-directory: build
+  キャッシュをS3に保存する場所（なくてもいい）
+cache:
+  paths:
+    - /tmp/node_modules.tar
+    # https://docs.aws.amazon.com/ja_jp/codebuild/latest/userguide/build-spec-ref.html
